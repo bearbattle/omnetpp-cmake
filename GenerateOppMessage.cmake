@@ -76,7 +76,7 @@ function(generate_opp_message msg_input)
     if(args_DIRECTORY)
         set(msg_prefix "${args_DIRECTORY}")
     else()
-        file(RELATIVE_PATH msg_prefix ${PROJECT_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR}/${msg_dir})
+        file(RELATIVE_PATH msg_prefix ${PROJECT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/${msg_dir})
     endif()
 
     set(msg_output_dir "${msg_output_root}/${msg_prefix}")
@@ -128,7 +128,7 @@ function(generate_opp_message msg_input)
 
     if (args_TARGET)
         target_sources(${args_TARGET} PRIVATE "${msg_output_source}" "${msg_output_header}")
-        target_include_directories(${args_TARGET} PUBLIC ${msg_output_root})
+        target_include_directories(${args_TARGET} PUBLIC ${msg_output_dir})
     endif()
 
     if(args_GEN_SOURCES)

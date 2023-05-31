@@ -1,5 +1,7 @@
 find_package(PythonInterp 3 REQUIRED)
 
+set(importopptarget_macro__internal_dir ${CMAKE_CURRENT_LIST_DIR} CACHE INTERNAL "")
+
 #[==[.rst:
 ImportOppTarget
 ---------------
@@ -24,7 +26,7 @@ macro(import_opp_target _target _opp_makefile)
 
     # generate target file (prior to build system generation)
     execute_process(
-        COMMAND ${PYTHON_EXECUTABLE} opp_cmake.py ${_opp_makefile} ${_cmake_target}
+        COMMAND ${PYTHON_EXECUTABLE} ${importopptarget_macro__internal_dir}/opp_cmake.py ${_opp_makefile} ${_cmake_target}
         ERROR_VARIABLE _opp_cmake_error
         RESULT_VARIABLE _opp_cmake_result
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
