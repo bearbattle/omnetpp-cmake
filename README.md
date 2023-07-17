@@ -53,7 +53,7 @@ The following is *one* of many other ways to do it.
     ```cmake
     # Uncomment the following if you have external dependencies like INET
     #find_path(INET_DIR NAMES src/inet/package.ned DOC "INET root directory")
-    #import_opp_target(inet ${INET_DIR}/src/Makefile)
+    #import_opp_target(INET ${INET_DIR}/src/Makefile)
 
     # Define your library/simulation sources
     set(SOURCES
@@ -67,16 +67,15 @@ The following is *one* of many other ways to do it.
         messages/a.msg
         messages/b.msg)
 
-    generate_opp_message(project_library
-        MESSAGE_FILES ${MESSAGE_SOURCES})
+    generate_opp_message(${MESSAGE_SOURCES})
 
     # You will need to tweak and add the additional properties for your project
     set_target_properties(project_library PROPERTIES
         OUTPUT_NAME my_project_sim
         NED_FOLDERS src)
 
-    # Link the libraries you need for your project; add "inet" if necessary
-    target_link_libraries(project_library opp_interface)
+    # Link the libraries you need for your project; add "INET" if necessary
+    target_link_libraries(project_library opp_interface )
 
     # This creates an OMNet++ CMake run for you
     add_opp_run(project_name 
