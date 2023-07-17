@@ -138,6 +138,9 @@ class CMakeTarget:
         props.append(")")
         props.append("set_property(TARGET {target} PROPERTY IMPORTED_CONFIGURATIONS {configs})"
                      .format(target=self.name, configs=" ".join(configurations)))
+        if os.name == 'nt':
+            for i, prop in enumerate(props):
+                props[i] = prop.replace('\\', '/')
         return props
 
 
